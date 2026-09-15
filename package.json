@@ -10,6 +10,7 @@
   ],
   "scripts": {},
   "devDependencies": {
+    "nodemon": "^3.0.0",
     "tsx": "^4.23.13",
     "typescript": "^7.0.2"
   }
