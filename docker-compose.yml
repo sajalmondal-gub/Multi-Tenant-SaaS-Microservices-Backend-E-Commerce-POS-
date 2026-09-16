@@ -5,8 +5,8 @@ services:
     image: postgres:15-alpine
     container_name: postgres_db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
@@ -29,10 +29,10 @@ services:
     container_name: api-gateway
     command: npm run dev --workspace=apps/api-gateway
     ports:
-      - "3000:3000"
+      - "${API_GATEWAY_PORT}:${API_GATEWAY_PORT}"
     environment:
-      - PORT=3000
-      - REDIS_URL=redis://redis:6379
+      - PORT=${API_GATEWAY_PORT}
+      - REDIS_URL=${REDIS_URL}
     volumes:
       - ./apps:/app/apps
       - ./packages:/app/packages
@@ -47,11 +47,11 @@ services:
     container_name: order-service
     command: npm run dev --workspace=apps/order-service
     ports:
-      - "3001:3001"
+      - "${ORDER_SERVICE_PORT}:${ORDER_SERVICE_PORT}"
     environment:
-      - PORT=3001
-      - DATABASE_URL=postgresql://postgres:password@postgres:5432/order_db
-      - REDIS_URL=redis://redis:6379
+      - PORT=${ORDER_SERVICE_PORT}
+      - DATABASE_URL=${ORDER_SERVICE_DB_URL}
+      - REDIS_URL=${REDIS_URL}
     volumes:
       - ./apps:/app/apps
       - ./packages:/app/packages
@@ -67,11 +67,11 @@ services:
     container_name: product-service
     command: npm run dev --workspace=apps/product-service
     ports:
-      - "3002:3002"
+      - "${PRODUCT_SERVICE_PORT}:${PRODUCT_SERVICE_PORT}"
     environment:
-      - PORT=3002
-      - DATABASE_URL=postgresql://postgres:password@postgres:5432/product_db
-      - REDIS_URL=redis://redis:6379
+      - PORT=${PRODUCT_SERVICE_PORT}
+      - DATABASE_URL=${PRODUCT_SERVICE_DB_URL}
+      - REDIS_URL=${REDIS_URL}
     volumes:
       - ./apps:/app/apps
       - ./packages:/app/packages
@@ -87,11 +87,11 @@ services:
     container_name: purchase-service
     command: npm run dev --workspace=apps/purchase-service
     ports:
-      - "3003:3003"
+      - "${PURCHASE_SERVICE_PORT}:${PURCHASE_SERVICE_PORT}"
     environment:
-      - PORT=3003
-      - DATABASE_URL=postgresql://postgres:password@postgres:5432/purchase_db
-      - REDIS_URL=redis://redis:6379
+      - PORT=${PURCHASE_SERVICE_PORT}
+      - DATABASE_URL=${PURCHASE_SERVICE_DB_URL}
+      - REDIS_URL=${REDIS_URL}
     volumes:
       - ./apps:/app/apps
       - ./packages:/app/packages
@@ -107,11 +107,11 @@ services:
     container_name: stock-management-service
     command: npm run dev --workspace=apps/stock-management-service
     ports:
-      - "3004:3004"
+      - "${STOCK_MANAGEMENT_SERVICE_PORT}:${STOCK_MANAGEMENT_SERVICE_PORT}"
     environment:
-      - PORT=3004
-      - DATABASE_URL=postgresql://postgres:password@postgres:5432/stock_db
-      - REDIS_URL=redis://redis:6379
+      - PORT=${STOCK_MANAGEMENT_SERVICE_PORT}
+      - DATABASE_URL=${STOCK_MANAGEMENT_SERVICE_DB_URL}
+      - REDIS_URL=${REDIS_URL}
     volumes:
       - ./apps:/app/apps
       - ./packages:/app/packages
@@ -127,11 +127,11 @@ services:
     container_name: tenant-service
     command: npm run dev --workspace=apps/tenant-service
     ports:
-      - "3005:3005"
+      - "${TENANT_SERVICE_PORT}:${TENANT_SERVICE_PORT}"
     environment:
-      - PORT=3005
-      - DATABASE_URL=postgresql://postgres:password@postgres:5432/tenant_db
-      - REDIS_URL=redis://redis:6379
+      - PORT=${TENANT_SERVICE_PORT}
+      - DATABASE_URL=${TENANT_SERVICE_DB_URL}
+      - REDIS_URL=${REDIS_URL}
     volumes:
       - ./apps:/app/apps
       - ./packages:/app/packages
@@ -147,11 +147,11 @@ services:
     container_name: theme-service
     command: npm run dev --workspace=apps/theme-service
     ports:
-      - "3006:3006"
+      - "${THEME_SERVICE_PORT}:${THEME_SERVICE_PORT}"
     environment:
-      - PORT=3006
-      - DATABASE_URL=postgresql://postgres:password@postgres:5432/theme_db
-      - REDIS_URL=redis://redis:6379
+      - PORT=${THEME_SERVICE_PORT}
+      - DATABASE_URL=${THEME_SERVICE_DB_URL}
+      - REDIS_URL=${REDIS_URL}
     volumes:
       - ./apps:/app/apps
       - ./packages:/app/packages
